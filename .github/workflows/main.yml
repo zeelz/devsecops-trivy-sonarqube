@@ -19,7 +19,7 @@ jobs:
       - name: Push to GHCR
         run: |          
           echo ${{ secrets.GITHUB_TOKEN }} | docker login -u ${{ github.actor }} --password-stdin ghcr.io
-          docker build -t ghcr.io/${{ github.repository }}/node-app . 
+          docker build -t --no-cache ghcr.io/${{ github.repository }}/node-app . 
           docker push ghcr.io/${{ github.repository }}/node-app
           
       - name: Trivy setup
