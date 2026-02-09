@@ -2,7 +2,7 @@ FROM node:alpine
 
 WORKDIR /express-app
 
-COPY package.json .
+COPY package*.json .
 
 RUN npm ci --only=production
 
