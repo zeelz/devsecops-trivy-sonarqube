@@ -31,4 +31,4 @@ jobs:
           exit-code: 1
           ignore-unfixed: true
           cache: false
-          severity: HIGH, CRITICAL
+          severity: HIGH,CRITICAL
