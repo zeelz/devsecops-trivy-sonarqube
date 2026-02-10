@@ -19,13 +19,14 @@ jobs:
       - name: Push to GHCR
         run: |          
           echo ${{ secrets.GITHUB_TOKEN }} | docker login -u ${{ github.actor }} --password-stdin ghcr.io
-          docker build --no-cache -t ghcr.io/${{ github.repository }}/node .
+          docker build --no-cache -t ghcr.io/${{ github.repository }}/node-api .
+          docker push ghcr.io/${{ github.repository }}/node-api
           
       - name: Trivy setup
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: image
-          image-ref: ghcr.io/${{ github.repository }}/node
+          image-ref: ghcr.io/${{ github.repository }}/node-api
           format: table
           exit-code: 1
           ignore-unfixed: true

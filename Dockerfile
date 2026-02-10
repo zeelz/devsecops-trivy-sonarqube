@@ -6,6 +6,8 @@ COPY package*.json .
 
 RUN npm ci --only=production
 
+### trivy fix
+
 # Uninstall vuln packages globally
 RUN npm uninstall -g @isaacs/brace-expansion tar
 
@@ -15,6 +17,8 @@ RUN rm -rf $(npm root -g)/tar
 
 # Install fixed packages "globally" to override base image package
 RUN npm install -g @isaacs/brace-expansion@^5.0.1 tar@^7.5.7
+
+### trivy fix @end # still sees old packages. Ignored CVEs to pass CI
 
 COPY . .
 

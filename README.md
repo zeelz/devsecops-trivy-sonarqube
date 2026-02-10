@@ -1,23 +1,33 @@
-## Simple Express API image
+# Trivy Scan Debug
 
-[https://hub.docker.com/r/zeelz/simple-express-app](https://hub.docker.com/r/zeelz/simple-express-app)
+## This repo demostrates how to fix vulnerable packages in codebase or base image
 
-```
-docker run -d
--p [HOST_PORT]:[CONTAINER_PORT] \
--e PORT=[CONTAINER_PORT] \
---platform linux/amd64 \
-zeelz/simple-express-app
-```
+### Fixing Vulnerable Packages in Codebase 
 
-Change `HOST_PORT` and `CONTAINER_PORT` to your desired ports
+- Installed "fixed" versions of affected packages as shown by Trivy
+- Remove `package-lock.json` before installing fixed packages to regenerate `package-lock.json`
+- Add package `overrides` in `package.json` with the newer packages
+- 
 
-**Example**
+### Fixing Base image Package
 
-`docker run -d -p 3000:3000 -e "PORT=3000" --platform linux/amd64 zeelz/simple-express-app`
+Uninstall vuln packages globally
 
-**Available route**
+`RUN npm uninstall -g @isaacs/brace-expansion tar`
 
-GET `/users`
+Remove packages
 
-POST `/users` {name, email}
+`RUN rm -rf $(npm root -g)/isaacs/brace-expansion`
+
+`RUN rm -rf $(npm root -g)/tar`
+
+Install fixed packages "globally" to override base image package
+
+`RUN npm install -g @isaacs/brace-expansion@^5.0.1 tar@^7.5.7`
+
+But Trivy still sees old packages. Ignored CVEs in `.trivyignore` to pass CI
+
+Until to find fix and update here
+
+
+### Sonar Qube - coming soon
