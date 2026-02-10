@@ -6,7 +6,8 @@ COPY package*.json .
 
 RUN npm ci --only=production
 
-# Install fixed packages "globally" to override base image package
+# Uninstall and install fixed packages "globally" to override base image package
+RUN npm uninstall -g @isaacs/brace-expansion tar
 RUN npm install -g @isaacs/brace-expansion@^5.0.1 tar@^7.5.7
 
 COPY . .
