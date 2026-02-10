@@ -26,7 +26,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: image
-          image-ref: node:slim # ghcr.io/${{ github.repository }}/node-app
+          image-ref: ghcr.io/${{ github.repository }}/node-app
           format: table
           exit-code: 1
           ignore-unfixed: true

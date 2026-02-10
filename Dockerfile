@@ -6,6 +6,9 @@ COPY package*.json .
 
 RUN npm ci --only=production
 
+# Uninstall vuln packages globally
+RUN npm uninstall -g @isaacs/brace-expansion tar
+
 # Remove packages
 RUN rm -rf $(npm root -g)/isaacs/brace-expansion 
 RUN rm -rf $(npm root -g)/tar
