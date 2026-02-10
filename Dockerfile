@@ -1,4 +1,4 @@
-FROM node:alpine-slim
+FROM node:slim
 
 WORKDIR /express-app
 
